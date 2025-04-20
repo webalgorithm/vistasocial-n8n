@@ -31,7 +31,7 @@ export class VistaSocial implements INodeType {
 			},
 		],
 		requestDefaults: {
-			baseURL: 'https://vistasocial.com/settings/preferences/integrations',
+			baseURL: 'https://vistasocial.com/api/integration',
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',
