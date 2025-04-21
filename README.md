@@ -1,6 +1,6 @@
 # n8n-nodes-vistasocial
 
-n8n nodes for create charges and payments with [Vista Social](https://vistasocial.com)
+n8n nodes for managing your social presence with [Vista Social](https://vistasocial.com)
 
 ## How to use
 
@@ -23,5 +23,5 @@ To get started install the package in your n8n root directory:
 1. Go to Credentials.
 2. Select `Add Credential` button.
 3. Select `Vista Social API` from the _Search for app_ dropdown.
-4. Get your Vista Social API key from [API Getting Started](https://vistasocial.com/settings/integrations).
+4. Get your Vista Social API key from [API Getting Started](https://vistasocial.com/settings/preferences/integrations).
 5. Enter your Vista Social API key in the _API Key_ field.
