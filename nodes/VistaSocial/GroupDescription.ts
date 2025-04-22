@@ -15,14 +15,15 @@ export const groupOperations: INodeProperties[] = [
 			{
 				name: 'List',
 				value: 'list',
-				description: "List groups",
+				description: "List profile groups within the user's account",
+				action: 'List groups',
 				routing: {
 					request: {
 						method: 'GET',
 						url: '/groups',
 					},
 				},
-				action: 'List groups',
+
 			},
 
 		],

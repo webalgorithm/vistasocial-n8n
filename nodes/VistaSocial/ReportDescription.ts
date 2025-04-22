@@ -60,9 +60,9 @@ export const reportFields: INodeProperties[] = [
 	},
 
 	{
-		displayName: 'Profile Name or ID',
+		displayName: 'Profile ID',
 		name: 'profile_id',
-		type: 'options',
+		type: 'string',
 		default: '',
 		required: true,
 		displayOptions: {
@@ -71,11 +71,7 @@ export const reportFields: INodeProperties[] = [
 				operation: ['getDailyMetrics'],
 			},
 		},
-		typeOptions: {
-			loadOptionsMethod: 'getProfiles',
-		},
-
-		description: 'Profile. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
+		description: 'Profile ID to retrieve data for',
 	},
 
 ];

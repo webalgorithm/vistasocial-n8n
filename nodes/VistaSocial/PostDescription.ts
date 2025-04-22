@@ -122,7 +122,7 @@ export const postFields: INodeProperties[] = [
 				type: 'body',
 			},
 		},
-		description: 'Publish at date. Format: now, queue_next, queue_last or YYYY-MM-DD HH:mm:ss. If not specified, the post will be published immediately.',
+		description: "Publish at date. Format: 'now', 'queue_next', 'queue_last' or YYYY-MM-DD HH:mm:ss. If not specified, the post will be published immediately.",
 	},
 
 	{
@@ -153,20 +153,16 @@ export const postFields: INodeProperties[] = [
 				displayName: 'Profile',
 				values: [
 					{
-						displayName: 'Profile Name or ID',
+						displayName: 'Profile ID',
 						name: 'value',
-						type: 'options',
-						description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+						type: 'string',
 						default: '',
-						typeOptions: {
-							loadOptionsMethod: 'getProfiles',
-						},
+
 					},
 				],
 			},
 		],
 
-		description: 'Profiles. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 	},
 
 	{
@@ -263,6 +259,25 @@ export const postFields: INodeProperties[] = [
 			},
 		},
 		description: 'Whether to create post like (Twitter, LinkedIn, YouTube, Bluesky)',
+	},
+	{
+		displayName: 'Save as Draft',
+		name: 'draft',
+		type: 'boolean',
+		default: false,
+		displayOptions: {
+			show: {
+				resource: ['post'],
+				operation: ['create'],
+			},
+		},
+		routing: {
+			send: {
+				property: 'draft',
+				type: 'body',
+			},
+		},
+		description: 'Whether to save this post as a draft',
 	},
 	{
 		displayName: 'Shortening Defaults',
@@ -423,26 +438,46 @@ export const postFields: INodeProperties[] = [
 		},
 		description: 'Enter public Instagram username. Only public Instagram profiles can be invited as collaborators.',
 	},
+
+
+
 	{
-		displayName: 'Save as Draft',
-		name: 'draft',
-		type: 'boolean',
-		default: false,
+		displayName: 'Labels',
+		name: 'labels',
+		type: 'fixedCollection',
+		typeOptions: {
+			multipleValues: true,
+		},
+		default: {},
 		displayOptions: {
 			show: {
 				resource: ['post'],
 				operation: ['create'],
 			},
 		},
+		options: [
+			{
+				name: 'label',
+				displayName: 'Label',
+				values: [
+					{
+						displayName: 'Label',
+						name: 'value',
+						type: 'string',
+						default: '',
+					},
+				],
+			},
+		],
 		routing: {
 			send: {
-				property: 'draft',
+				property: 'labels',
 				type: 'body',
+				value: '={{$parameter["labels"].user.map(label => item.value)}}',
 			},
 		},
-		description: 'Whether to save this post as a draft',
+		description: 'Internal post labels. If not specified, the post will be created without labels.',
 	},
-
 	{
 		displayName: 'Pinterest Board Name',
 		name: 'pinterest_board_name',
@@ -483,43 +518,6 @@ export const postFields: INodeProperties[] = [
 		description: 'Pinterest board name. Only relevant if Pinterest is selected as a profile.',
 	},
 	{
-		displayName: 'Labels',
-		name: 'labels',
-		type: 'fixedCollection',
-		typeOptions: {
-			multipleValues: true,
-		},
-		default: {},
-		displayOptions: {
-			show: {
-				resource: ['post'],
-				operation: ['create'],
-			},
-		},
-		options: [
-			{
-				name: 'label',
-				displayName: 'Label',
-				values: [
-					{
-						displayName: 'Label',
-						name: 'value',
-						type: 'string',
-						default: '',
-					},
-				],
-			},
-		],
-		routing: {
-			send: {
-				property: 'labels',
-				type: 'body',
-				value: '={{$parameter["labels"].user.map(label => item.value)}}',
-			},
-		},
-		description: 'Internal post labels. If not specified, the post will be created without labels.',
-	},
-	{
 		displayName: 'Subreddit',
 		name: 'subreddit_name',
 		type: 'string',
@@ -537,30 +535,5 @@ export const postFields: INodeProperties[] = [
 			},
 		},
 		description: 'Subreddit name. Required if Reddit is selected as a profile.',
-	},
-	{
-		displayName: 'Workflow Name or ID',
-		name: 'workflow',
-		type: 'options',
-		default: '',
-
-		displayOptions: {
-			show: {
-				resource: ['post'],
-				operation: ['create'],
-			},
-		},
-		routing: {
-			send: {
-				property: 'workflow',
-				type: 'body',
-				//value: '={{$parameter["workflow"][0].value}}',
-			},
-		},
-		typeOptions: {
-			loadOptionsMethod: 'getWorkflows',
-		},
-
-		description: 'Approval workflow. Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>.',
 	},
 ];

@@ -7,7 +7,7 @@ import { ideaOperations, ideaFields } from './IdeaDescription';
 import { noteOperations, noteFields } from './NoteDescription';
 import { commentOperations, commentFields } from './CommentDescription';
 import { reportOperations, reportFields } from './ReportDescription';
-import { getProfiles, getWorkflows, getUsers, getGroups } from './GenericFunctions';
+// import { getProfiles, getWorkflows, getUsers } from './GenericFunctions';
 
 export class VistaSocial implements INodeType {
 	description: INodeTypeDescription = {
@@ -17,7 +17,7 @@ export class VistaSocial implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Get data from Vsita Social',
+		description: 'Get data from Vista Social',
 		defaults: {
 			name: 'Vista Social',
 		},
@@ -42,7 +42,8 @@ export class VistaSocial implements INodeType {
 				displayName: 'Resource',
 				name: 'resource',
 				type: 'options',
-				default: 'comment',
+				default: 'group',
+				required: true,
 				noDataExpression: true,
 				options: [
 					{
@@ -73,12 +74,10 @@ export class VistaSocial implements INodeType {
 						name: 'Report',
 						value: 'report',
 					},
-
-
 				],
-				required: true,
 			},
-			...groupOperations,
+
+			 ...groupOperations,
 			...profileOperations,
 			...profileFields,
 			...postOperations,
@@ -95,14 +94,14 @@ export class VistaSocial implements INodeType {
 	};
 
 
-	methods = {
-		loadOptions: {
-			getProfiles,
-			getWorkflows,
-			getUsers,
-			getGroups
-		},
-	};
+	// methods = {
+	// 	loadOptions: {
+	// 		getProfiles,
+	// 		getWorkflows,
+	// 		getUsers,
+	// 	},
+	// };
+
 
 
 }

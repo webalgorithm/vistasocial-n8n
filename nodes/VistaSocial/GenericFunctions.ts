@@ -17,6 +17,8 @@ export async function vistaSocialApiRequest(
 	uri?: string,
 	headers: IDataObject = {},
 ) {
+
+	console.log('we are performing api request')
 	const options: IRequestOptions = {
 		headers: {
 			'Content-Type': 'application/json',
@@ -81,13 +83,13 @@ export async function getUsers(this: ILoadOptionsFunctions): Promise<INodeProper
 	return options;
 }
 
-export async function getGroups(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
-	const responseData = await vistaSocialApiRequest.call(this, 'GET', '/groups');
-	const groups = responseData as [{ id: string; name: string;}];
-	const options: INodePropertyOptions[] = groups.map((item) => {
-		const name = item.name;
-		const value = item.id;
-		return { name, value };
-	});
-	return options;
-}
+// export async function getGroups(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+// 	const responseData = await vistaSocialApiRequest.call(this, 'GET', '/groups');
+// 	const groups = responseData as [{ id: string; name: string;}];
+// 	const options: INodePropertyOptions[] = groups.map((item) => {
+// 		const name = item.name;
+// 		const value = item.id;
+// 		return { name, value };
+// 	});
+// 	return options;
+// }

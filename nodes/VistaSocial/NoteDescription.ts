@@ -202,14 +202,11 @@ export const noteFields: INodeProperties[] = [
 				displayName: 'Group',
 				values: [
 					{
-						displayName: 'Group Name or ID',
+						displayName: 'Group ID',
 						name: 'value',
-						type: 'options',
-						description: 'Choose from the list, or specify an ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
+						type: 'string',
+						description: 'Choose from the list, or specify a group ID using an <a href="https://docs.n8n.io/code/expressions/">expression</a>',
 						default: '',
-						typeOptions: {
-							loadOptionsMethod: 'getGroups',
-						},
 					},
 				],
 			},
